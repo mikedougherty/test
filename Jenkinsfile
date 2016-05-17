@@ -1,4 +1,6 @@
 node("linux") {
   checkout scm
-  sh "make echo"
+  withCredentials([[$class: 'FileBinding',credentialsId: "secret-file.test", variable: "SECRET_FILE"]]) {
+    sh "make -e echo"
+  }
 }
